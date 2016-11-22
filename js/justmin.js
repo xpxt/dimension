@@ -72,6 +72,7 @@ var app = {
 		box: function (_) {
 			let box = app.create.object (_);
 				box.fill = _.fill || 'transparent';
+				box.tracks = {};
 				box.z = _.z || 0;
 
 				box.draw = function () {
@@ -80,9 +81,29 @@ var app = {
 				}
 
 				box.move = function (x, y) {
-					app.zen (box);
 					box.x = x;
 					box.y = y;
+					app.zen (box);
+					box.track ();
+				}
+
+				box.track = function () {
+					for (let id in app.object) {
+						if (app.object[id].draw) {
+							if (box.tracks[id]) {
+								if (!app.get.binbox (box, app.object[id])) {
+									app.object[id].redraw = 1;
+									app.zen (app.object[id]);
+								}
+							}
+
+							if (app.get.binbox (box, app.object[id])) {
+								box.tracks[id] = true;
+							} else {
+								box.tracks[id] = false;
+							}
+						}
+					}
 				}
 
 			return box;
@@ -191,7 +212,6 @@ var app = {
 				render[app.object[id].z][id] = app.object[id];
 			}
 		}
-
 
 		for (let z in render) {
 			for (let id in render[z]) {
@@ -312,7 +332,7 @@ var app = {
 	update: function (event) {
 		for (let id in app.object) {
 			for (let method in app.object[id]) {
-				if (method == event.type) { app.object[id][method] (event); }
+				if (method == event.type) { app.object[id][method] (event);  }
 			}
 		}
 		app.draw ();
