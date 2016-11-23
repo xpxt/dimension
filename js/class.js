@@ -7,6 +7,7 @@ app.create.block = function (_) {
 
 app.create.unit = function (_) {
 	let unit = app.create.sprite (_);
+		unit.control = _.control;
 		unit.g = _.g;
 		unit.hp = _.hp || [1, 1];
 		unit.speed = _.speed || 1;
@@ -35,13 +36,45 @@ app.create.unit = function (_) {
 				} else {
 					unit.x = x;
 					unit.y = y;
+					unit.vx = x;
+					unit.vy = y;
 				}
 			}
 		}
 
 		unit.goto = function (event) {
-			unit.vx = event.x - 0.5 * unit.w;
-			unit.vy = event.y - 0.5 * unit.h;
+			switch (unit.control) {
+				case 'key':
+					if (event.type == 'keydown') {
+						unit.going = true;
+						switch (event.keyCode) {
+							case 65:
+								unit.vx = (unit.vx > 0) ? unit.vx - unit.speed : unit.vx;
+								unit.vy -= unit.g * unit.g / unit.vr;
+								break;
+							case 68:
+								unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + unit.speed : unit.vx;
+								unit.vy -= unit.g * unit.g / unit.vr;
+								break;
+							case 83:
+								unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + unit.speed : unit.vy;
+								break;
+							case 87:
+								unit.vy = (unit.vy > 0) ? unit.vy - unit.speed : unit.vy;
+								break;
+						}
+						console.log (event.keyCode);
+					}
+					break;
+
+				case 'mouse':
+					if (event.type == 'mousedown') {
+						unit.going = true;
+						unit.vx = event.x - 0.5 * unit.w;
+						unit.vy = event.y - 0.5 * unit.h;
+					}
+					break;
+			}
 		}
 
 		unit.gravity = function () {
@@ -52,8 +85,15 @@ app.create.unit = function (_) {
 			}
 		}
 
+		unit.keydown = function (event) {
+			unit.goto (event);
+		}
+
+		unit.keyup = function (event) {
+			unit.going = false;
+		}
+
 		unit.mousedown = function (event) {
-			unit.going = true;
 			unit.goto (event);
 		}
 

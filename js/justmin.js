@@ -3,6 +3,8 @@ var window = window;
 	window.time = 0;
 
 	window.load = function (update) {
+		window.onkeydown = update;
+		window.onkeyup = update;
 		window.onmousedown = update;
 		window.onmousemove = update;
 		window.onmouseup = update;

@@ -11,5 +11,5 @@ app.scene.menu = function () {
 	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 300, y: 400 }).load ();
 	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 700, y: 400 }).load ();
 
-	app.create.unit ({ g: 5, h: 170, i: app.i.pussy, speed: 5, w: 50, x: 500, y: 400, z: 2 }).load ();
+	app.create.unit ({ control: 'key', g: 5, h: 170, i: app.i.pussy, speed: 5, w: 50, x: 500, y: 400, z: 2 }).load ();
 }
