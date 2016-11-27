@@ -7,7 +7,6 @@ app.create.block = function (_) {
 
 app.create.unit = function (_) {
 	let unit = app.create.sprite (_);
-		unit.control = _.control;
 		unit.g = _.g;
 		unit.hp = _.hp || [1, 1];
 		unit.speed = _.speed || 1;
@@ -42,41 +41,6 @@ app.create.unit = function (_) {
 			}
 		}
 
-		unit.goto = function (event) {
-			switch (unit.control) {
-				case 'key':
-					if (event.type == 'keydown') {
-						unit.going = true;
-						switch (event.keyCode) {
-							case 65:
-								unit.vx = (unit.vx > 0) ? unit.vx - unit.speed : unit.vx;
-								unit.vy -= unit.g * unit.g / unit.vr;
-								break;
-							case 68:
-								unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + unit.speed : unit.vx;
-								unit.vy -= unit.g * unit.g / unit.vr;
-								break;
-							case 83:
-								unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + unit.speed : unit.vy;
-								break;
-							case 87:
-								unit.vy = (unit.vy > 0) ? unit.vy - unit.speed : unit.vy;
-								break;
-						}
-						console.log (event.keyCode);
-					}
-					break;
-
-				case 'mouse':
-					if (event.type == 'mousedown') {
-						unit.going = true;
-						unit.vx = event.x - 0.5 * unit.w;
-						unit.vy = event.y - 0.5 * unit.h;
-					}
-					break;
-			}
-		}
-
 		unit.gravity = function () {
 			if (unit.g) {
 				if (!unit.blocked ()) {
@@ -85,29 +49,30 @@ app.create.unit = function (_) {
 			}
 		}
 
-		unit.keydown = function (event) {
-			unit.goto (event);
-		}
-
-		unit.keyup = function (event) {
-			unit.going = false;
-		}
-
-		unit.mousedown = function (event) {
-			unit.goto (event);
-		}
-
-		unit.mousemove = function (event) {
-			if (unit.going) { unit. goto (event); }
-		}
-
-		unit.mouseup = function () {
-			unit.going = false;
-		}
-
 		unit.tick = function () {
-			unit.go ();
+			unit.vector ();
 			unit.gravity ();
+			unit.go ();
+		}
+
+		unit.vector = function () {
+			if (app.key.A) {
+				unit.vx = (unit.vx > 0) ? unit.vx - 2*unit.speed : unit.vx;
+				unit.vy -= unit.speed * unit.g * unit.g / unit.vr;
+			}
+
+			if (app.key.D) {
+				unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + 2*unit.speed : unit.vx;
+				unit.vy -= unit.speed * unit.g * unit.g / unit.vr;
+			}
+
+			if (app.key.S) {
+				unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + 2*unit.speed : unit.vy;
+			}
+
+			if (app.key.W) {
+				unit.vy = (unit.vy > 0) ? unit.vy - 2 * unit.speed : unit.vy;
+			}
 		}
 
 	return unit;

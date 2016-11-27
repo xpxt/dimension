@@ -1,5 +1,5 @@
 var window = window;
-	window.tick = 50;
+	window.tick = 40;
 	window.time = 0;
 
 	window.load = function (update) {
@@ -317,6 +317,17 @@ var app = {
 
 	id: 0,
 
+	key: {
+		control: function (event) {
+			if (event.type == 'keydown') {
+				app.key[String.fromCharCode(event.keyCode)] = true;
+			}
+			if (event.type == 'keyup') {
+				app.key[String.fromCharCode(event.keyCode)] = false;
+			}
+		}
+	},
+
 	load: function () {
 		window.load (app.update);
 		window.onresize = function () {
@@ -332,6 +343,7 @@ var app = {
 	scene: { load: function () {} },
 
 	update: function (event) {
+		app.key.control (event);
 		for (let id in app.object) {
 			for (let method in app.object[id]) {
 				if (method == event.type) { app.object[id][method] (event);  }
