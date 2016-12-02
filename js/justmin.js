@@ -1,5 +1,5 @@
 var window = window;
-	window.tick = 40;
+	window.tick = 50;
 	window.time = 0;
 
 	window.load = function (update) {
@@ -49,6 +49,7 @@ var app = {
 			let animation = app.create.sprite (_);
 				animation.a = _.a || [new Image()];
 				animation.delay = _.delay || window.delay;
+				animation.link = _.link;
 				animation.step = _.step || 0;
 				animation.stop = _.stop || false;
 				animation.time = _.time || window.time;
@@ -64,7 +65,19 @@ var app = {
 					}
 				}
 
+				animation.keydown = function () {
+					animation.linking ();
+				}
+
+				animation.linking = function () {
+					if (animation.link) {
+						animation.x = animation.link.x;
+						animation.y = animation.link.y;
+					}
+				}
+
 				animation.tick = function () {
+					animation.linking ();
 					animation.animate ();
 				}
 

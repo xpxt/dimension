@@ -57,21 +57,19 @@ app.create.unit = function (_) {
 
 		unit.vector = function () {
 			if (app.key.A) {
-				unit.vx = (unit.vx > 0) ? unit.vx - 2*unit.speed : unit.vx;
-				unit.vy -= unit.speed * unit.g * unit.g / unit.vr;
+				unit.vx = (unit.vx > 0) ? unit.vx - unit.speed : unit.vx;
 			}
 
 			if (app.key.D) {
-				unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + 2*unit.speed : unit.vx;
-				unit.vy -= unit.speed * unit.g * unit.g / unit.vr;
+				unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + unit.speed : unit.vx;
 			}
 
 			if (app.key.S) {
-				unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + 2*unit.speed : unit.vy;
+				unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + unit.speed : unit.vy;
 			}
 
 			if (app.key.W) {
-				unit.vy = (unit.vy > 0) ? unit.vy - 2 * unit.speed : unit.vy;
+				unit.vy = (unit.vy > 0) ? unit.vy - unit.speed : unit.vy;
 			}
 		}
 
