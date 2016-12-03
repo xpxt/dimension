@@ -16,5 +16,5 @@ app.scene.menu = function () {
 	let hero = app.create.unit ({ h: 85, speed: 5, w: 25, x: 500, y: 400, z: 2 });
 		hero.load ();
 
-	app.create.animation ({ a: app.a.pussy_move, delay: 150, get stop () { return hero.animation.stop; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 3 }).load ();
+	app.create.animation ({ a: app.a.pussy_move, delay: 150, get stop () { return !hero.animation.walk; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 3 }).load ();
 }

@@ -33,7 +33,6 @@ app.create.unit = function (_) {
 				unit.y = v.y;
 				if (!unit.blocked ()) {
 					unit.move (v.x, v.y);
-					unit.animation.stop = false;
 				} else {
 					unit.x = x;
 					unit.y = y;
@@ -41,7 +40,7 @@ app.create.unit = function (_) {
 					unit.vy = y;
 				}
 			} else {
-				unit.animation.stop = true;
+				unit.animation.walk = false;
 			}
 		}
 
@@ -62,18 +61,22 @@ app.create.unit = function (_) {
 		unit.vector = function () {
 			if (app.key.A) {
 				unit.vx = (unit.vx > 0) ? unit.vx - unit.speed : unit.vx;
+				unit.animation.walk = true;
 			}
 
 			if (app.key.D) {
 				unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + unit.speed : unit.vx;
+				unit.animation.walk = true;
 			}
 
 			if (app.key.S) {
 				unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + unit.speed : unit.vy;
+				unit.animation.walk = true;
 			}
 
 			if (app.key.W) {
 				unit.vy = (unit.vy > 0) ? unit.vy - unit.speed : unit.vy;
+				unit.animation.walk = true;
 			}
 		}
 
