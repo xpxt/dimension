@@ -60,7 +60,7 @@ var app = {
 							animation.time = window.time;
 							animation.step = (animation.step >= animation.a.length - 1) ? 0 : animation.step + 1;
 							animation.i = animation.a[animation.step];
-							animation.redraw = 1;
+							app.zen (animation);
 						}
 					}
 				}

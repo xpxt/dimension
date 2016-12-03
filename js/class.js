@@ -7,6 +7,7 @@ app.create.block = function (_) {
 
 app.create.unit = function (_) {
 	let unit = app.create.sprite (_);
+		unit.animation = _.animation || {};
 		unit.g = _.g;
 		unit.hp = _.hp || [1, 1];
 		unit.speed = _.speed || 1;
@@ -32,12 +33,15 @@ app.create.unit = function (_) {
 				unit.y = v.y;
 				if (!unit.blocked ()) {
 					unit.move (v.x, v.y);
+					unit.animation.stop = false;
 				} else {
 					unit.x = x;
 					unit.y = y;
 					unit.vx = x;
 					unit.vy = y;
 				}
+			} else {
+				unit.animation.stop = true;
 			}
 		}
 

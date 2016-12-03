@@ -10,11 +10,11 @@ app.scene.menu = function () {
 
 	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 300, y: 400 }).load ();
 	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 700, y: 400 }).load ();
+	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 300, y: 200 }).load ();
+	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 700, y: 200 }).load ();
 
-	let hero = app.create.unit ({ h: 170, speed: 7, w: 50, x: 500, y: 400, z: 2 });
+	let hero = app.create.unit ({ h: 85, speed: 5, w: 25, x: 500, y: 400, z: 2 });
 		hero.load ();
 
-	app.create.animation ({ a: app.a.pussy_move, delay: 500, h: 170, i: app.i.pussy, link: hero, x: 100, y: 100, w: 50, z: 3 }).load ();
-
-
+	app.create.animation ({ a: app.a.pussy_move, delay: 150, get stop () { return hero.animation.stop; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 3 }).load ();
 }
