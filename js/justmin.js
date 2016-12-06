@@ -73,6 +73,19 @@ var app = {
 					if (animation.link) {
 						animation.x = animation.link.x;
 						animation.y = animation.link.y;
+						if (animation.stop) {
+							if (animation.link_image) {
+								animation.i = new Image ();
+								animation.link.i = animation.link_image;
+								animation.link.redraw = true;
+								animation.link_image = undefined;
+							}
+						} else {
+							if (animation.link_image == undefined) {
+								animation.link_image = animation.link.i.cloneNode (true);
+							}
+							animation.link.i = new Image ();
+						}
 					}
 				}
 
@@ -272,9 +285,9 @@ var app = {
 								(Math.abs (a.y - b.y + 0.5 * (a.h - b.h)) < 0.5 * Math.abs (a.h + b.h)));
 		},
 
-		clone: function clone(obj) {
+		clone: function (obj) {
 		    if (null == obj || "object" != typeof obj) return obj;
-		    let copy = obj.constructor();
+		    let copy = new obj.constructor();
 		    for (let attr in obj) {
 		        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
 		    }
