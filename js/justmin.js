@@ -76,11 +76,9 @@ var app = {
 						if (animation.stop) {
 							if (animation.i.width != 0) {
 								animation.i = new Image ();
-								console.log ('1');
 							}
 
 							if (animation.link_image) {
-								animation.i = new Image ();
 								animation.link.i = animation.link_image;
 								animation.link.redraw = true;
 								animation.link_image = undefined;
