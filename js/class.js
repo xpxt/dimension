@@ -53,9 +53,18 @@ app.create.unit = function (_) {
 		}
 
 		unit.tick = function () {
+			unit.use ();
 			unit.vector ();
 			unit.gravity ();
 			unit.go ();
+		}
+
+		unit.use = function () {
+			if (app.key[' '] && !unit.animation.walk) {
+				unit.animation.say = true;
+			} else {
+				unit.animation.say = false;
+			}
 		}
 
 		unit.vector = function () {

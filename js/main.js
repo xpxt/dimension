@@ -18,5 +18,5 @@ app.scene.menu = function () {
 
 	app.create.animation ({ a: app.a.pussy_move, delay: 150, get stop () { return !hero.animation.walk; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 2 }).load ();
 
-	//app.create.animation ({ a: app.a.pussy_say, delay: 150, get stop () { return !hero.animation.say; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 2 }).load ();
+	app.create.animation ({ a: app.a.pussy_say, delay: 150, get stop () { return !hero.animation.say; }, h: 85, i: app.i.pussy, link: hero, x: 100, y: 100, w: 25, z: 2 }).load ();
 }
