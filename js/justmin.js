@@ -80,14 +80,14 @@ var app = {
 
 							if (animation.link_image) {
 								animation.link.i = animation.link_image;
-								animation.link.redraw = true;
 								animation.link_image = undefined;
+								app.zen (animation);
 							}
 						} else {
 							if (animation.link_image == undefined) {
 								animation.link_image = animation.link.i.cloneNode (true);
+								animation.link.i = new Image ();
 							}
-							animation.link.i = new Image ();
 						}
 					}
 				}

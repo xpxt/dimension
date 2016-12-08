@@ -40,7 +40,9 @@ app.create.unit = function (_) {
 					unit.vy = y;
 				}
 			} else {
-				unit.animation.walk = false;
+				if (!app.key.A && !app.key.D && !app.key.S && !app.key.W) {
+					unit.animation.walk = false;
+				}
 			}
 		}
 
