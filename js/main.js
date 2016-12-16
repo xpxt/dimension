@@ -5,13 +5,20 @@ app.scene.load = function () {
 
 app.scene.menu = function () {
 	app.wipe ();
-	app.create.block ({ fill: '#f00', h: 20, w: 800, x: 300, y: 600, z: 1 }).load ();
-	app.create.block ({ fill: '#f00', h: 10, w: 800, x: 300, y: 190, z: 1 }).load ();
 
-	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 300, y: 400 }).load ();
-	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 700, y: 400 }).load ();
-	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 300, y: 200 }).load ();
-	app.create.box ({ fill: '#bbf', h: 200, w: 400, x: 700, y: 200 }).load ();
+	//app.create.block ({ fill: '#f00', h: 20, w: 800, x: 300, y: 600, z: 1 }).load ();
+	//app.create.block ({ fill: '#f00', h: 10, w: 800, x: 300, y: 190, z: 1 }).load ();
+
+	let s = 24;
+	let h = Math.floor (canvas.height / s);
+	let w = Math.floor (canvas.width / s);
+	for (let i = 0; i < w; i++) {
+		for (let j = 0; j < h; j++) {
+			let x = i * s;
+			let y = j * s;
+			app.create.sprite ({ h: s, i: app.i.grass, w: s, x: x, y: y }).load ();
+		}
+	}
 
 	let hero = app.create.unit ({ h: 85, i: app.i.pussy, speed: 5, w: 25, x: 500, y: 400, z: 2 });
 		hero.load ();

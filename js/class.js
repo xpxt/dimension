@@ -31,6 +31,7 @@ app.create.unit = function (_) {
 				let y = unit.y;
 				unit.x = v.x;
 				unit.y = v.y;
+
 				if (!unit.blocked ()) {
 					unit.move (v.x, v.y);
 				} else {
@@ -39,6 +40,7 @@ app.create.unit = function (_) {
 					unit.vx = x;
 					unit.vy = y;
 				}
+
 			} else {
 				if (!app.key.A && !app.key.D && !app.key.S && !app.key.W) {
 					unit.animation.walk = false;

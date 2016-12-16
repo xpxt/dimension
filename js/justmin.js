@@ -81,7 +81,7 @@ var app = {
 							if (animation.link_image) {
 								animation.link.i = animation.link_image;
 								animation.link_image = undefined;
-								app.zen (animation);
+								app.zen (animation.link);
 							}
 						} else {
 							if (animation.link_image == undefined) {
